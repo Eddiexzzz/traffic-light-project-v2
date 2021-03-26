@@ -16,7 +16,9 @@ input.onButtonPressed(Button.A, function () {
         pins.digitalWritePin(DigitalPin.P2, 1)
         basic.pause(1000)
         pins.digitalWritePin(DigitalPin.P2, 1)
-        basic.pause(19000)
+        basic.pause(1000)
+        pins.digitalWritePin(DigitalPin.P2, 1)
+        basic.pause(18000)
         // If there are pedestrians waiting the program accounts for them and lets them cross on green.
         // If no pedestrians the program continues as normal.
         if (Pedestrian == 1) {
