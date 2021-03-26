@@ -1,24 +1,21 @@
 // Once A is pressed the program begins.
 input.onButtonPressed(Button.A, function () {
-    pins.digitalWritePin(DigitalPin.P2, 1)
-    basic.showLeds(`
-        . # # # .
-        # # # # #
-        # # # # #
-        # # # # #
-        . # # # .
-        `)
     A = 1
     // Restarts the program if uninterrupted.
     while (A == 1) {
-        pins.digitalWritePin(DigitalPin.P0, 0)
-        pins.digitalWritePin(DigitalPin.P1, 0)
-        pins.digitalWritePin(DigitalPin.P2, 1)
-        basic.pause(1000)
-        pins.digitalWritePin(DigitalPin.P2, 1)
-        basic.pause(1000)
-        pins.digitalWritePin(DigitalPin.P2, 1)
-        basic.pause(18000)
+        for (let index = 0; index < 20; index++) {
+            basic.showLeds(`
+                . # # # .
+                # # # # #
+                # # # # #
+                # # # # #
+                . # # # .
+                `)
+            pins.digitalWritePin(DigitalPin.P0, 0)
+            pins.digitalWritePin(DigitalPin.P1, 0)
+            pins.digitalWritePin(DigitalPin.P2, 1)
+            basic.pause(1000)
+        }
         // If there are pedestrians waiting the program accounts for them and lets them cross on green.
         // If no pedestrians the program continues as normal.
         if (Pedestrian == 1) {
@@ -81,13 +78,6 @@ let Power = 1
 Mode = 0
 A = 0
 Pedestrian = 0
-// Runs emergency lights until the program begins.
-while (A == 0) {
-    pins.digitalWritePin(DigitalPin.P2, 1)
-    basic.pause(500)
-    pins.digitalWritePin(DigitalPin.P2, 0)
-    basic.pause(500)
-}
 // If A+B is pressed it goes to flashing red or flashing yellow depending on how many times A+B was pressed.
 while (Power == 1) {
     if (Mode == 1) {
