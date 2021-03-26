@@ -1,5 +1,6 @@
 // Once A is pressed the program begins.
 input.onButtonPressed(Button.A, function () {
+    Mode = 3
     A = 1
     // Restarts the program if uninterrupted.
     while (A == 1) {
@@ -60,7 +61,7 @@ input.onButtonPressed(Button.A, function () {
 input.onButtonPressed(Button.AB, function () {
     A = 0
     Pedestrian = 0
-    if (Mode == 0) {
+    if (Mode == 3) {
         Mode = 1
     } else if (Mode == 1) {
         Mode = 0
@@ -81,7 +82,7 @@ Pedestrian = 0
 // If A+B is pressed it goes to flashing red or flashing yellow depending on how many times A+B was pressed.
 while (Power == 1) {
     if (Mode == 1) {
-        while (A == 0 && Mode == 1) {
+        while (Mode == 1) {
             basic.showLeds(`
                 . . . . .
                 . . . . .
@@ -106,7 +107,7 @@ while (Power == 1) {
             basic.pause(500)
         }
     } else if (Mode == 0) {
-        while (A == 0 && Mode == 0) {
+        while (Mode == 0) {
             basic.showLeds(`
                 . . . . .
                 . . . . .
