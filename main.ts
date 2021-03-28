@@ -2,10 +2,10 @@
 input.onButtonPressed(Button.A, function () {
     A = 1
     while (Power == 1) {
-        // Restarts the program if uninterrupted.
         if (A == 1) {
-            // Restarts the program if uninterrupted.
+            // Repeats unless given a different command
             while (A == 1) {
+                // 20 second red light
                 for (let index = 0; index < 20; index++) {
                     basic.showLeds(`
                         . # # # .
@@ -59,8 +59,12 @@ input.onButtonPressed(Button.A, function () {
                 }
             }
         }
+        // If AB was pressed emergency program takes place
         if (AB == 1) {
             while (AB == 1) {
+                // Mode 1 is flashing yellow
+                // Mode 2 is flashing red
+                // Resumes the regular program
                 if (Mode == 1) {
                     while (Mode == 1) {
                         basic.showLeds(`
@@ -119,7 +123,7 @@ input.onButtonPressed(Button.A, function () {
         }
     }
 })
-// Changes between flashing red and flashing yellow.
+// Changes modes from flashing yellow, flashing red and regular.
 input.onButtonPressed(Button.AB, function () {
     AB = 1
     A = 0
@@ -136,6 +140,13 @@ input.onButtonPressed(Button.AB, function () {
 input.onButtonPressed(Button.B, function () {
     Pedestrian = 1
 })
+/**
+ * P0=Green
+ * 
+ * P1=Yellow
+ * 
+ * P2=Red
+ */
 // Sets the program.
 let Pedestrian = 0
 let A = 0
@@ -157,7 +168,7 @@ AB = 0
 Mode = 0
 A = 0
 Pedestrian = 0
-// Restarts the program if uninterrupted.
+// Flashes red until A is pressed
 while (A == 0) {
     pins.digitalWritePin(DigitalPin.P2, 1)
     basic.pause(500)
