@@ -1,6 +1,5 @@
 // Once A is pressed the program begins.
 input.onButtonPressed(Button.A, function () {
-    Mode = 3
     A = 1
     // Restarts the program if uninterrupted.
     while (A == 1) {
@@ -83,8 +82,8 @@ input.onButtonPressed(Button.A, function () {
                     pins.digitalWritePin(DigitalPin.P1, 0)
                     basic.pause(500)
                 }
-            } else if (Mode == 0) {
-                while (Mode == 0) {
+            } else if (Mode == 2) {
+                while (Mode == 2) {
                     basic.showLeds(`
                         . . . . .
                         . . . . .
@@ -108,21 +107,22 @@ input.onButtonPressed(Button.A, function () {
                     pins.digitalWritePin(DigitalPin.P2, 0)
                     basic.pause(500)
                 }
+            } else if (Mode == 2) {
+                AB = 0
             }
         }
     }
 })
 // Changes between flashing red and flashing yellow.
 input.onButtonPressed(Button.AB, function () {
-    if (Mode == 3) {
-        Mode = 0
-    }
     AB = 1
     A = 0
     Pedestrian = 0
     if (Mode == 0) {
         Mode = 1
     } else if (Mode == 1) {
+        Mode = 2
+    } else if (Mode == 2) {
         Mode = 0
     }
 })
