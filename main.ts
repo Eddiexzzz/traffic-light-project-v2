@@ -56,12 +56,71 @@ input.onButtonPressed(Button.A, function () {
             pins.digitalWritePin(DigitalPin.P1, 0)
         }
     }
+    if (AB == 1) {
+        while (AB == 1) {
+            if (Mode == 1) {
+                while (Mode == 1) {
+                    basic.showLeds(`
+                        . . . . .
+                        . . . . .
+                        . . . . .
+                        . . . . .
+                        . . . . .
+                        `)
+                    pins.digitalWritePin(DigitalPin.P0, 0)
+                    pins.digitalWritePin(DigitalPin.P2, 0)
+                    pins.digitalWritePin(DigitalPin.P1, 1)
+                    basic.pause(500)
+                    basic.showLeds(`
+                        . . . . .
+                        . . . . .
+                        . . . . .
+                        . . . . .
+                        . . . . .
+                        `)
+                    pins.digitalWritePin(DigitalPin.P0, 0)
+                    pins.digitalWritePin(DigitalPin.P2, 0)
+                    pins.digitalWritePin(DigitalPin.P1, 0)
+                    basic.pause(500)
+                }
+            } else if (Mode == 0) {
+                while (Mode == 0) {
+                    basic.showLeds(`
+                        . . . . .
+                        . . . . .
+                        . . . . .
+                        . . . . .
+                        . . . . .
+                        `)
+                    pins.digitalWritePin(DigitalPin.P0, 0)
+                    pins.digitalWritePin(DigitalPin.P1, 0)
+                    pins.digitalWritePin(DigitalPin.P2, 1)
+                    basic.pause(500)
+                    basic.showLeds(`
+                        . . . . .
+                        . . . . .
+                        . . . . .
+                        . . . . .
+                        . . . . .
+                        `)
+                    pins.digitalWritePin(DigitalPin.P0, 0)
+                    pins.digitalWritePin(DigitalPin.P1, 0)
+                    pins.digitalWritePin(DigitalPin.P2, 0)
+                    basic.pause(500)
+                }
+            }
+        }
+    }
 })
 // Changes between flashing red and flashing yellow.
 input.onButtonPressed(Button.AB, function () {
+    if (Mode == 3) {
+        Mode = 0
+    }
+    AB = 1
     A = 0
     Pedestrian = 0
-    if (Mode == 3) {
+    if (Mode == 0) {
         Mode = 1
     } else if (Mode == 1) {
         Mode = 0
@@ -75,61 +134,25 @@ input.onButtonPressed(Button.B, function () {
 let Pedestrian = 0
 let A = 0
 let Mode = 0
-let Power = 1
+let AB = 0
+basic.showLeds(`
+    . . . . .
+    . . . . .
+    . . . . .
+    . . . . .
+    . . . . .
+    `)
+pins.digitalWritePin(DigitalPin.P0, 0)
+pins.digitalWritePin(DigitalPin.P1, 0)
+pins.digitalWritePin(DigitalPin.P2, 0)
+AB = 0
 Mode = 0
 A = 0
 Pedestrian = 0
-// If A+B is pressed it goes to flashing red or flashing yellow depending on how many times A+B was pressed.
-while (Power == 1) {
-    if (Mode == 1) {
-        while (Mode == 1) {
-            basic.showLeds(`
-                . . . . .
-                . . . . .
-                . . . . .
-                . . . . .
-                . . . . .
-                `)
-            pins.digitalWritePin(DigitalPin.P0, 0)
-            pins.digitalWritePin(DigitalPin.P2, 0)
-            pins.digitalWritePin(DigitalPin.P1, 1)
-            basic.pause(500)
-            basic.showLeds(`
-                . . . . .
-                . . . . .
-                . . . . .
-                . . . . .
-                . . . . .
-                `)
-            pins.digitalWritePin(DigitalPin.P0, 0)
-            pins.digitalWritePin(DigitalPin.P2, 0)
-            pins.digitalWritePin(DigitalPin.P1, 0)
-            basic.pause(500)
-        }
-    } else if (Mode == 0) {
-        while (Mode == 0) {
-            basic.showLeds(`
-                . . . . .
-                . . . . .
-                . . . . .
-                . . . . .
-                . . . . .
-                `)
-            pins.digitalWritePin(DigitalPin.P0, 0)
-            pins.digitalWritePin(DigitalPin.P1, 0)
-            pins.digitalWritePin(DigitalPin.P2, 1)
-            basic.pause(500)
-            basic.showLeds(`
-                . . . . .
-                . . . . .
-                . . . . .
-                . . . . .
-                . . . . .
-                `)
-            pins.digitalWritePin(DigitalPin.P0, 0)
-            pins.digitalWritePin(DigitalPin.P1, 0)
-            pins.digitalWritePin(DigitalPin.P2, 0)
-            basic.pause(500)
-        }
-    }
+// Restarts the program if uninterrupted.
+while (A == 0) {
+    pins.digitalWritePin(DigitalPin.P2, 1)
+    basic.pause(500)
+    pins.digitalWritePin(DigitalPin.P2, 0)
+    basic.pause(500)
 }
