@@ -64,6 +64,7 @@ input.onButtonPressed(Button.A, function () {
             while (AB == 1) {
                 // Mode 1 is flashing yellow
                 // Mode 2 is flashing red
+                // Turns everything off
                 // Resumes the regular program
                 if (Mode == 1) {
                     while (Mode == 1) {
@@ -115,6 +116,17 @@ input.onButtonPressed(Button.A, function () {
                         pins.digitalWritePin(DigitalPin.P2, 0)
                         basic.pause(500)
                     }
+                } else if (Mode == 3) {
+                    pins.digitalWritePin(DigitalPin.P0, 0)
+                    pins.digitalWritePin(DigitalPin.P1, 0)
+                    pins.digitalWritePin(DigitalPin.P2, 0)
+                    basic.showLeds(`
+                        . . . . .
+                        . . . . .
+                        . . . . .
+                        . . . . .
+                        . . . . .
+                        `)
                 } else if (Mode == 0) {
                     AB = 0
                     A = 1
@@ -123,7 +135,7 @@ input.onButtonPressed(Button.A, function () {
         }
     }
 })
-// Changes modes from flashing yellow, flashing red and regular.
+// Changes modes from flashing yellow, flashing red, off, and regular.
 input.onButtonPressed(Button.AB, function () {
     AB = 1
     A = 0
@@ -133,6 +145,8 @@ input.onButtonPressed(Button.AB, function () {
     } else if (Mode == 1) {
         Mode = 2
     } else if (Mode == 2) {
+        Mode = 3
+    } else if (Mode == 3) {
         Mode = 0
     }
 })
